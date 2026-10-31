@@ -1,0 +1,4 @@
+pid:     2294
+exe:     /usr/bin/sleep
+verdict: CLEAR
+reason:  binary is owned by an installed package (/usr/bin/sleep)

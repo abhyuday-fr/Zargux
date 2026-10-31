@@ -1,0 +1,6 @@
+pid=15827
+--- readlink ---
+/usr/bin/stress-ng
+--- psi ---
+some avg10=28.91 avg60=6.48 avg300=6.46 total=50100006
+full avg10=0.00 avg60=0.00 avg300=0.00 total=0

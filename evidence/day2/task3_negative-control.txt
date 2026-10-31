@@ -1,0 +1,4 @@
+pid:     3060
+exe:     /home/ubuntu/bin/my-legit-tool
+verdict: WATCH
+reason:  binary is not package-managed, but not in a writable temp location (/home/ubuntu/bin/my-legit-tool)

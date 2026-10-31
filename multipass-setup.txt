@@ -1,0 +1,12 @@
+multipass launch 24.04 --name zargux-lab --cpus 2 --memory 2G --disk 15G
+
+multipass list
+multipass info zargux-lab
+
+// to confirm PSI is enabled
+multipass exec zargux-lab -- cat /proc/pressure/cpu
+
+multipass exec zargux-lab -- sudo apt update
+multipass exec zargux-lab -- sudo apt install -y stress-ng sysstat
+
+

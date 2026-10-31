@@ -1,0 +1,2 @@
+    PID %CPU CMD
+  13129  0.6 /usr/bin/stress-ng --cpu 2 --timeout 20s

@@ -1,0 +1,38 @@
+[
+  {
+    "date": "2026-10-13",
+    "time": "20:32:26",
+    "summary": "pid 12016 (/usr/bin/stress-ng): package-managed (/usr/bin/stress-ng)",
+    "severity": "Info"
+  },
+  {
+    "date": "2026-10-13",
+    "time": "20:32:29",
+    "summary": "pid 12032 (/dev/shm/stress-copy): running from a writable temp location (/dev/shm/stress-copy)",
+    "severity": "High"
+  },
+  {
+    "date": "2026-10-13",
+    "time": "20:32:31",
+    "summary": "pid 12043 (/home/ubuntu/bin/my-legit-tool): unpackaged, but not in a writable temp location (/home/ubuntu/bin/my-legit-tool)",
+    "severity": "Medium"
+  },
+  {
+    "date": "2026-10-13",
+    "time": "20:32:48",
+    "summary": "pid 12125 (/usr/bin/stress-ng): package-managed (/usr/bin/stress-ng)",
+    "severity": "Info"
+  },
+  {
+    "date": "2026-10-13",
+    "time": "20:32:51",
+    "summary": "pid 12141 (/dev/shm/stress-copy): running from a writable temp location (/dev/shm/stress-copy)",
+    "severity": "High"
+  },
+  {
+    "date": "2026-10-13",
+    "time": "20:32:54",
+    "summary": "pid 12152 (/home/ubuntu/bin/my-legit-tool): unpackaged, but not in a writable temp location (/home/ubuntu/bin/my-legit-tool)",
+    "severity": "Medium"
+  }
+]

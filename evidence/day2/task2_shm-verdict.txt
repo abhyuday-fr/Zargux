@@ -1,0 +1,4 @@
+pid:     2700
+exe:     /dev/shm/stress-copy
+verdict: HIGH
+reason:  binary runs from a writable temp location (/dev/shm/stress-copy)

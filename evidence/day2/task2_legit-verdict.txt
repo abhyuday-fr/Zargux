@@ -1,0 +1,4 @@
+pid:     2461
+exe:     /usr/bin/stress-ng
+verdict: CLEAR
+reason:  binary is owned by an installed package (/usr/bin/stress-ng)

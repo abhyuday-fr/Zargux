@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zargux</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    /* Catppuccin Macchiato */
+    :root {
+      --rosewater: #f4dbd6;
+      --mauve: #c6a0f6;
+      --red: #ed8796;
+      --peach: #f5a97f;
+      --green: #a6da95;
+      --sapphire: #7dc4e4;
+      --blue: #8aadf4;
+      --lavender: #b7bdf8;
+      --text: #cad3f5;
+      --subtext1: #b8c0e0;
+      --subtext0: #a5adcb;
+      --overlay1: #8087a2;
+      --overlay0: #6e738d;
+      --surface2: #5b6078;
+      --surface1: #494d64;
+      --surface0: #363a4f;
+      --base: #24273a;
+      --mantle: #1e2030;
+      --crust: #181926;
+
+      --high: var(--red);
+      --watch: var(--peach);
+      --info: var(--sapphire);
+      --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+      --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      color-scheme: dark;
+    }
+
+    body {
+      margin: 0;
+      background: var(--base);
+      color: var(--text);
+      font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 48px 28px 64px;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--lavender);
+      outline-offset: 2px;
+    }
+
+    ::selection {
+      background: var(--surface2);
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+
+    h1 {
+      margin: 0;
+      font: 700 clamp(44px, 7vw, 68px)/0.95 var(--display);
+      letter-spacing: -0.04em;
+      color: var(--rosewater);
+    }
+
+    header p {
+      margin: 14px 0 0;
+      max-width: 56ch;
+      color: var(--subtext0);
+      font-size: 15px;
+    }
+
+    /* Overview: one panel, two halves */
+    .overview {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      background: var(--mantle);
+      border: 1px solid var(--surface0);
+      border-radius: 14px;
+      margin-bottom: 40px;
+      overflow: hidden;
+    }
+
+    .overview>section {
+      padding: 22px 24px 20px;
+    }
+
+    .overview>section+section {
+      border-left: 1px solid var(--surface0);
+    }
+
+    h2 {
+      margin: 0;
+      font: 500 14px/1.2 var(--display);
+      color: var(--subtext0);
+      letter-spacing: 0.01em;
+    }
+
+    .big {
+      font: 700 52px/1 var(--display);
+      letter-spacing: -0.03em;
+      margin: 14px 0 4px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .note {
+      color: var(--overlay1);
+      font-size: 13px;
+    }
+
+    #spark {
+      display: block;
+      width: 100%;
+      height: 64px;
+      margin-top: 14px;
+    }
+
+    #spark .area {
+      fill: var(--sapphire);
+      opacity: .14;
+    }
+
+    #spark .line {
+      fill: none;
+      stroke: var(--sapphire);
+      stroke-width: 2;
+      vector-effect: non-scaling-stroke;
+      stroke-linejoin: round;
+    }
+
+    #spark .base {
+      stroke: var(--surface1);
+      stroke-width: 1;
+      vector-effect: non-scaling-stroke;
+      stroke-dasharray: 3 4;
+    }
+
+    .mix {
+      display: flex;
+      height: 10px;
+      border-radius: 5px;
+      overflow: hidden;
+      background: var(--surface0);
+      margin: 4px 0 16px;
+      gap: 2px;
+    }
+
+    .mix span {
+      display: block;
+      height: 100%;
+      min-width: 0;
+      transition: width .4s ease;
+    }
+
+    .mix .h {
+      background: var(--high);
+    }
+
+    .mix .w {
+      background: var(--watch);
+    }
+
+    .mix .i {
+      background: var(--info);
+    }
+
+    .sev {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .sev li {
+      display: grid;
+      grid-template-columns: 10px 1fr auto;
+      gap: 4px 10px;
+      align-items: baseline;
+    }
+
+    .sev i {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      align-self: center;
+    }
+
+    .sev b {
+      font-weight: 600;
+    }
+
+    .sev .n {
+      font: 500 15px var(--mono);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .sev small {
+      grid-column: 2 / 4;
+      color: var(--overlay1);
+      font-size: 12.5px;
+      line-height: 1.35;
+    }
+
+    /* Pipeline */
+    details {
+      margin-bottom: 40px;
+    }
+
+    summary {
+      cursor: pointer;
+      font: 500 14px var(--display);
+      color: var(--subtext0);
+      list-style: none;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      width: max-content;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-right: 2px solid var(--overlay1);
+      border-bottom: 2px solid var(--overlay1);
+      transform: rotate(-45deg);
+      transition: transform .15s;
+    }
+
+    details[open] summary::before {
+      transform: rotate(45deg) translate(-2px, -2px);
+    }
+
+    summary:hover {
+      color: var(--text);
+    }
+
+    .flow {
+      list-style: none;
+      margin: 18px 0 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0 28px;
+      counter-reset: s;
+    }
+
+    .flow li {
+      position: relative;
+      padding-top: 22px;
+      border-top: 2px solid var(--surface1);
+    }
+
+    .flow li::before {
+      content: "";
+      position: absolute;
+      top: -6px;
+      left: 0;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--mauve);
+      box-shadow: 0 0 0 4px var(--base);
+    }
+
+    .flow li:last-child {
+      border-top-color: var(--mauve);
+    }
+
+    .flow em {
+      font-style: normal;
+      color: var(--mauve);
+      font-size: 13px;
+    }
+
+    .flow h3 {
+      margin: 2px 0 6px;
+      font: 500 16px var(--display);
+    }
+
+    .flow p {
+      margin: 0;
+      color: var(--subtext0);
+      font-size: 13.5px;
+      line-height: 1.5;
+    }
+
+    code {
+      font: 400 0.9em var(--mono);
+      background: var(--surface0);
+      padding: 1px 5px;
+      border-radius: 4px;
+      color: var(--lavender);
+    }
+
+    /* Findings */
+    .bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .bar h2 {
+      font-size: 22px;
+      color: var(--text);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .live {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 6px;
+      color: var(--overlay1);
+      font-size: 12.5px;
+    }
+
+    .live i {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    .live i.beat {
+      animation: beat .9s ease-out;
+    }
+
+    @keyframes beat {
+      from {
+        box-shadow: 0 0 0 0 color-mix(in srgb, var(--green) 70%, transparent);
+      }
+
+      to {
+        box-shadow: 0 0 0 8px transparent;
+      }
+    }
+
+    .controls {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .controls input,
+    .controls select,
+    .controls button {
+      background: var(--mantle);
+      border: 1px solid var(--surface0);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 7px 11px;
+      font: 13px system-ui, sans-serif;
+    }
+
+    .controls input[type=search] {
+      width: 220px;
+    }
+
+    .controls input[type=datetime-local] {
+      color-scheme: dark;
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+
+    .controls input::placeholder {
+      color: var(--overlay0);
+    }
+
+    .controls input:hover,
+    .controls select:hover,
+    .controls button:hover {
+      border-color: var(--surface2);
+    }
+
+    .controls label {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      color: var(--overlay1);
+      font-size: 12.5px;
+    }
+
+    .controls button {
+      cursor: pointer;
+      color: var(--subtext1);
+    }
+
+    .scroll {
+      overflow-x: auto;
+      border-top: 1px solid var(--surface0);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      text-align: left;
+      font: 500 12.5px var(--display);
+      color: var(--overlay1);
+      padding: 12px 14px 8px;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 10px 14px;
+      border-top: 1px solid color-mix(in srgb, var(--surface0) 60%, transparent);
+      vertical-align: baseline;
+    }
+
+    tbody tr:first-child td {
+      border-top: 0;
+    }
+
+    tbody tr:hover {
+      background: color-mix(in srgb, var(--surface0) 45%, transparent);
+    }
+
+    td:first-child {
+      box-shadow: inset 3px 0 0 var(--c);
+      white-space: nowrap;
+    }
+
+    td.when {
+      font: 400 12.5px var(--mono);
+      color: var(--overlay1);
+      white-space: nowrap;
+    }
+
+    td.when span {
+      color: var(--subtext0);
+    }
+
+    td.summary {
+      font: 400 13px/1.55 var(--mono);
+      color: var(--text);
+      word-break: break-word;
+    }
+
+    .sevtag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--c);
+    }
+
+    .sevtag::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--c);
+    }
+
+    tr.high {
+      --c: var(--high);
+    }
+
+    tr.watch {
+      --c: var(--watch);
+    }
+
+    tr.info {
+      --c: var(--info);
+    }
+
+    tr.info .sevtag {
+      color: var(--subtext0);
+    }
+
+    .empty {
+      padding: 44px 16px;
+      text-align: center;
+      color: var(--overlay1);
+      font-size: 14px;
+      border-top: 1px solid var(--surface0);
+    }
+
+    @media (max-width: 820px) {
+      .wrap {
+        padding: 32px 18px 48px;
+      }
+
+      .overview {
+        grid-template-columns: 1fr;
+      }
+
+      .overview>section+section {
+        border-left: 0;
+        border-top: 1px solid var(--surface0);
+      }
+
+      .flow {
+        grid-template-columns: 1fr 1fr;
+        row-gap: 24px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .flow {
+        grid-template-columns: 1fr;
+      }
+
+      .controls input[type=search] {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <header>
+      <div>
+        <h1>Zargux</h1>
+        <p>Incident detection for Linux servers that checks where a binary came from, so a legitimate process and a
+          malicious one running the same load don't look alike.</p>
+      </div>
+    </header>
+
+    <div class="overview">
+      <section aria-labelledby="psi-h">
+        <h2 id="psi-h">CPU pressure, 10s average</h2>
+        <div class="big" id="psi-value">–</div>
+        <div class="note" id="psi-updated">Waiting for data</div>
+        <svg id="spark" viewBox="0 0 300 64" preserveAspectRatio="none" role="img"
+          aria-label="CPU pressure over the last few minutes"></svg>
+      </section>
+      <section aria-labelledby="sev-h">
+        <h2 id="sev-h">Findings so far</h2>
+        <div class="big" id="stat-total">0</div>
+        <div class="mix" id="mix" aria-hidden="true"><span class="h"></span><span class="w"></span><span
+            class="i"></span></div>
+        <ul class="sev">
+          <li><i style="background:var(--high)"></i><b>High</b><span class="n" id="stat-high">0</span><small>Running
+              from a writable temp path, or deleted from disk</small></li>
+          <li><i style="background:var(--watch)"></i><b>Watch</b><span class="n" id="stat-medium">0</span><small>Not
+              installed by a package manager, but in a normal location</small></li>
+          <li><i style="background:var(--info)"></i><b>Info</b><span class="n"
+              id="stat-info">0</span><small>Package-managed, normal origin</small></li>
+        </ul>
+      </section>
+    </div>
+
+    <details open>
+      <summary>How Zargux decides</summary>
+      <ol class="flow">
+        <li><em>Attack</em>
+          <h3>Drop and run</h3>
+          <p>A binary is copied to a writable location such as <code>/dev/shm</code> or <code>/tmp</code> and executed.
+            This is how real malware hides.</p>
+        </li>
+        <li><em>Evidence</em>
+          <h3>Read origin and pressure</h3>
+          <p><code>/proc/&lt;pid&gt;/exe</code> shows where the binary lives. <code>/proc/pressure/cpu</code> shows
+            system load.</p>
+        </li>
+        <li><em>Detection</em>
+          <h3>Classify by origin</h3>
+          <p>Writable-temp or deleted is High. Unpackaged elsewhere is Watch. Package-managed is Info.</p>
+        </li>
+        <li><em>Response</em>
+          <h3>Log and display</h3>
+          <p>Each verdict is timestamped, saved, and shown here without anyone reading a terminal.</p>
+        </li>
+      </ol>
+    </details>
+
+    <section aria-labelledby="f-h">
+      <div class="bar">
+        <div>
+          <h2 id="f-h">Live findings</h2>
+          <div class="live"><i id="beat"></i><span id="last-updated">Connecting</span></div>
+        </div>
+        <div class="controls">
+          <input type="search" id="search" placeholder="Search findings" aria-label="Search findings">
+          <select id="severity-filter" aria-label="Filter by severity">
+            <option value="all">All severities</option>
+            <option value="High">High</option>
+            <option value="Medium">Watch</option>
+            <option value="Info">Info</option>
+          </select>
+          <label>From <input type="datetime-local" id="from-filter"></label>
+          <label>To <input type="datetime-local" id="to-filter"></label>
+          <button id="clear-range" type="button">Clear range</button>
+        </div>
+      </div>
+      <div class="scroll">
+        <table id="table">
+          <thead>
+            <tr>
+              <th>Severity</th>
+              <th>When</th>
+              <th>Finding</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+      <div class="empty" id="empty-msg" style="display:none"></div>
+    </section>
+
+  </div>
+
+  <script>
+    let allFindings = [];
+    const psiHistory = [];
+    const MAX_SAMPLES = 60;
+    const $ = id => document.getElementById(id);
+
+    const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+
+    function sevKey(sev) {
+      if (sev === 'High' || sev === 'Critical') return 'high';
+      if (sev === 'Medium') return 'watch';
+      return 'info';
+    }
+    const sevLabel = {high: 'High', watch: 'Watch', info: 'Info'};
+
+    function render() {
+      const search = $('search').value.toLowerCase();
+      const filter = $('severity-filter').value;
+      const fromVal = $('from-filter').value;
+      const toVal = $('to-filter').value;
+
+      let rows = allFindings.slice().reverse(); // newest first
+      if (filter !== 'all') rows = rows.filter(r => r.severity === filter);
+      if (search) rows = rows.filter(r => String(r.summary).toLowerCase().includes(search));
+      if (fromVal) {const d = new Date(fromVal); rows = rows.filter(r => new Date(`${r.date}T${r.time}`) >= d);}
+      if (toVal) {const d = new Date(toVal); rows = rows.filter(r => new Date(`${r.date}T${r.time}`) <= d);}
+
+      const tbody = $('rows'), empty = $('empty-msg');
+      if (rows.length === 0) {
+        tbody.innerHTML = '';
+        $('table').style.display = 'none';
+        empty.style.display = 'block';
+        empty.innerHTML = allFindings.length === 0
+          ? 'No findings yet. Run <code>zargux.py demo</code>, <code>scan</code> or <code>watch</code> on the target VM and detections will appear here.'
+          : 'No findings match these filters. Clear the search or date range to see everything.';
+      } else {
+        empty.style.display = 'none';
+        $('table').style.display = '';
+        tbody.innerHTML = rows.map(r => {
+          const k = sevKey(r.severity);
+          return `<tr class="${k}">
+        <td><span class="sevtag">${sevLabel[k]}</span></td>
+        <td class="when">${esc(r.date)} <span>${esc(r.time)}</span></td>
+        <td class="summary">${esc(r.summary)}</td>
+      </tr>`;
+        }).join('');
+      }
+
+      const c = {high: 0, watch: 0, info: 0};
+      allFindings.forEach(f => c[sevKey(f.severity)]++);
+      const total = allFindings.length;
+      $('stat-total').textContent = total;
+      $('stat-high').textContent = c.high;
+      $('stat-medium').textContent = c.watch;
+      $('stat-info').textContent = c.info;
+      const [h, w, i] = $('mix').children;
+      h.style.width = total ? (c.high / total * 100) + '%' : '0';
+      w.style.width = total ? (c.watch / total * 100) + '%' : '0';
+      i.style.width = total ? (c.info / total * 100) + '%' : '0';
+    }
+
+    function drawSpark() {
+      const svg = $('spark');
+      if (psiHistory.length < 2) {svg.innerHTML = '<line class="base" x1="0" y1="63" x2="300" y2="63"/>'; return;}
+      const max = Math.max(20, ...psiHistory);
+      const step = 300 / (MAX_SAMPLES - 1);
+      const x0 = 300 - (psiHistory.length - 1) * step;
+      const pts = psiHistory.map((v, i) => [x0 + i * step, 62 - (v / max) * 58]);
+      const line = pts.map(p => p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' ');
+      svg.innerHTML =
+        '<line class="base" x1="0" y1="62" x2="300" y2="62"/>' +
+        `<polygon class="area" points="${x0},62 ${line} 300,62"/>` +
+        `<polyline class="line" points="${line}"/>`;
+    }
+
+    async function loadFindings() {
+      try {
+        const res = await fetch('findings.json?t=' + Date.now());
+        allFindings = await res.json();
+      } catch (e) {allFindings = [];}
+      render();
+    }
+
+    async function loadPsi() {
+      const val = $('psi-value');
+      try {
+        const res = await fetch('psi.json?t=' + Date.now());
+        const psi = await res.json();
+        const n = parseFloat(psi.avg10);
+        val.textContent = psi.avg10 + '%';
+        val.style.color = n >= 40 ? 'var(--red)' : n >= 10 ? 'var(--yellow, #eed49f)' : 'var(--text)';
+        $('psi-updated').textContent = 'Updated ' + psi.updated;
+        if (!isNaN(n)) {psiHistory.push(n); if (psiHistory.length > MAX_SAMPLES) psiHistory.shift();}
+      } catch (e) {
+        val.textContent = '–';
+        val.style.color = '';
+        $('psi-updated').textContent = 'No data. Run zargux.py watch to start collecting.';
+      }
+      drawSpark();
+    }
+
+    function tick() {
+      Promise.all([loadFindings(), loadPsi()]);
+      $('last-updated').textContent = 'Refreshed ' + new Date().toLocaleTimeString() + ', every 3 seconds';
+      const b = $('beat'); b.classList.remove('beat'); void b.offsetWidth; b.classList.add('beat');
+    }
+
+    ['search', 'severity-filter', 'from-filter', 'to-filter'].forEach(id =>
+      $(id).addEventListener(id === 'search' ? 'input' : 'change', render));
+    $('clear-range').addEventListener('click', () => {
+      $('from-filter').value = ''; $('to-filter').value = ''; render();
+    });
+
+    tick();
+    setInterval(tick, 3000);
+  </script>
+</body>
+
+</html>

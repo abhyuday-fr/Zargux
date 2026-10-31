@@ -1,0 +1,2 @@
+Name                    State             IPv4             Image
+zargux-lab              Running           10.171.95.100    Ubuntu 24.04 LTS

@@ -1,0 +1,6 @@
+pid=16056
+--- readlink ---
+/dev/shm/stress-copy
+--- psi ---
+some avg10=59.95 avg60=15.14 avg300=8.32 total=56087765
+full avg10=0.00 avg60=0.00 avg300=0.00 total=0
